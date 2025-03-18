@@ -4,6 +4,7 @@ import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import HomeClassic from "../Components/HomeClassic";  
+import HomeDeals from "../Components/HomeDeals";
 
 export default function Navbar() {
   const [show, setShow] = useState(true);
@@ -211,7 +212,14 @@ export default function Navbar() {
               {menu.submenu.map((item, subIndex) => (
                 <a
                   key={subIndex}
-                  href={item === "Home Classic" ? "/home-classic" : "#"}
+                  href={
+                    item === "Home Classic" 
+                      ? "/home-classic" 
+                      : item === "Home Deals" 
+                        ? "/home-deals" 
+                        : "#"
+                  }
+          
                   className="block px-4 py-2 text-gray-700 hover:bg-teal-100 transition"
                 >
                   {item}
