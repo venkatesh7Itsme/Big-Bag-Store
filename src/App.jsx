@@ -9,6 +9,7 @@ import LatestArticles from "./Components/LatestArticles";
 import Comments from "./Components/Comments";
 import Footer from "./Components/Footer";
 import HomeClassic from "./Components/HomeClassic"; 
+import HomeDeals from "./Components/HomeDeals";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
 
         {/* Home Classic page */}
         <Route path="/home-classic" element={<HomeClassic />} /> {/* ✅ Added this */}
+        <Route path="/home-deals" element={<HomeDeals />} /> {/* ✅ Added this */}
+        
       </Routes>
       <Footer/>
     </Router>
