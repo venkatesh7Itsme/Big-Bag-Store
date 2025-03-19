@@ -10,6 +10,7 @@ import Comments from "./Components/Comments";
 import Footer from "./Components/Footer";
 import HomeClassic from "./Components/HomeClassic"; 
 import HomeDeals from "./Components/HomeDeals";
+import HomeOnepage from "./Components/HomeOnepage";
 import "./App.css";
 
 function App() {
@@ -33,8 +34,11 @@ function App() {
         <Route path="/comments" element={<Comments />} />
 
         {/* Home Classic page */}
-        <Route path="/home-classic" element={<HomeClassic />} /> {/* ✅ Added this */}
-        <Route path="/home-deals" element={<HomeDeals />} /> {/* ✅ Added this */}
+        <Route path="/home-classic" element={<HomeClassic />} /> 
+        <Route path="/home-deals" element={<HomeDeals />} /> 
+      
+        <Route path="/home-onepage" element={<HomeOnepage />} /> 
+        
         
       </Routes>
       <Footer/>
