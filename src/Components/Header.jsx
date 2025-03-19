@@ -1,12 +1,16 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { FaTwitter, FaFacebookF, FaDribbble, FaVimeoV, FaTumblr } from "react-icons/fa";
 import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import HomeClassic from "../Components/HomeClassic";  
 import HomeDeals from "../Components/HomeDeals";
+import HomeOnepage  from "../Components/HomeOnepage";
+
 
 export default function Navbar() {
+  const location = useLocation();
   const [show, setShow] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -17,6 +21,7 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const searchRef = useRef(null);
 
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY.current) {
@@ -32,7 +37,8 @@ export default function Navbar() {
         setSearchOpen(false);
       }
     };
-
+    
+  
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -60,7 +66,9 @@ export default function Navbar() {
   const closeCreateAccountModal = () => {
     setCreateAccountModalOpen(false);
   };
-
+  if (location.pathname === "/home-onepage") {
+    return null;
+  }
   
 
   return (
@@ -217,6 +225,10 @@ export default function Navbar() {
                       ? "/home-classic" 
                       : item === "Home Deals" 
                         ? "/home-deals" 
+                        : item === "Home Mega" 
+                        ? "/home-mega" 
+                        : item === "Home Onepage" 
+                        ? "/home-onepage" 
                         : "#"
                   }
           
