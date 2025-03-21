@@ -11,6 +11,8 @@ import Footer from "./Components/Footer";
 import HomeClassic from "./Components/HomeClassic"; 
 import HomeDeals from "./Components/HomeDeals";
 import HomeOnepage from "./Components/HomeOnepage";
+import Shop from "./Components/Shop";
+
 import "./App.css";
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
       
         <Route path="/home-onepage" element={<HomeOnepage />} /> 
         
+        <Route path="/shop" element={<Shop />} /> 
+
         
       </Routes>
       <Footer/>
