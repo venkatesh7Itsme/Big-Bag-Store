@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaTwitter, FaFacebookF, FaDribbble, FaVimeoV, FaTumblr } from "react-icons/fa";
 import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import HomeClassic from "../Components/HomeClassic";  
 import HomeDeals from "../Components/HomeDeals";
 import HomeOnepage  from "../Components/HomeOnepage";
+import Shop from "../Components/Shop";
 
 
 export default function Navbar() {
@@ -14,7 +15,7 @@ export default function Navbar() {
   const [show, setShow] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [hoverMenu, setHoverMenu] = useState(null);  
   const [createAccountModalOpen, setCreateAccountModalOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   
@@ -40,12 +41,16 @@ export default function Navbar() {
     
   
 
+    document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const toggleDropdown = (menu) => {
-    setDropdownOpen(dropdownOpen === menu ? null : menu);
-  };
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [])
+
+ 
 
   const handleLoginClick = (e) => {
     e.preventDefault();
@@ -150,102 +155,121 @@ export default function Navbar() {
           </svg>
 
 
- {/* Navigation Menu */}
- <nav className="hidden md:flex space-x-10 text-[16px] font-semibold ml-auto relative px-16 py-6">
-
-          {[
-            { name: "HOME", submenu: ["Home Default", "Home Classic", "Home Deals", "Home Mega", "Home Onepage"] },
-            {
-              name: "SHOP",
-              isMegaMenu: true,
-              submenu: [
-                {
-                  title: "PRODUCTS GRID VIEW",
-                  links: ["Products Sidebar Left", "Products Sidebar Right", "Products 3 Columns V1", "Products 3 Columns V2", "Products 4 Columns"],
-                },
-                {
-                  title: "PRODUCTS LIST VIEW",
-                  links: ["Products Sidebar Left", "Products Sidebar Right"],
-                },
-                {
-                  title: "PRODUCT SINGLE",
-                  links: ["Single Product", "Product Comparison"],
-                },
-                {
-                  title: "CHECKOUT",
-                  links: ["Step 1 - Shipping", "Step 2 - Payment", "Step 3 - Review", "Step 4 - Complete"],
-                },
-                {
-                  title: "OTHERS",
-                  links: ["Product Categories", "Cart Page"],
-                },
-              ],
-            },
-            { name: "PAGES", submenu: ["About Us", "Contact Us", "Register", "Login", "FAQ", "404 Not Found"] },
-            { name: "BLOG", submenu: ["Right Sidebar", "Left Sidebar", "Full Width", "Single Post"] },
-            { name: "MY ACCOUNT", submenu: ["Dashboard", "Orders", "Wishlist", "Profile Settings"] },
-            { name: "COMPONENTS", submenu: ["Buttons", "Forms", "Cards", "Modals", "Typography"] }
-          ].map((menu, index) => (
-            <div key={index} className="relative group">
-              <button
-                onClick={() => toggleDropdown(menu.name)}
-                className="text-black hover:text-teal-400 transition duration-200"
+          <nav className="hidden md:flex space-x-10 text-[16px] font-semibold ml-auto relative px-16 py-6">
+            {[
+              { name: "HOME", submenu: ["Home Default", "Home Classic", "Home Deals", "Home Mega", "Home Onepage"] },
+              {
+                name: "SHOP",
+                isMegaMenu: true,
+                submenu: [
+                  {
+                    title: "PRODUCTS GRID VIEW",
+                    links: ["Products Sidebar Left", "Products Sidebar Right", "Products 3 Columns V1", "Products 3 Columns V2", "Products 4 Columns"],
+                  },
+                  {
+                    title: "PRODUCTS LIST VIEW",
+                    links: ["Products Sidebar Left", "Products Sidebar Right"],
+                  },
+                  {
+                    title: "PRODUCT SINGLE",
+                    links: ["Single Product", "Product Comparison"],
+                  },
+                  {
+                    title: "CHECKOUT",
+                    links: ["Step 1 - Shipping", "Step 2 - Payment", "Step 3 - Review", "Step 4 - Complete"],
+                  },
+                  {
+                    title: "OTHERS",
+                    links: ["Product Categories", "Cart Page"],
+                  },
+                ],
+              },
+              { name: "PAGES", submenu: ["About Us", "Contact Us", "Register", "Login", "FAQ", "404 Not Found"] },
+              { name: "BLOG", submenu: ["Right Sidebar", "Left Sidebar", "Full Width", "Single Post"] },
+              { name: "MY ACCOUNT", submenu: ["Dashboard", "Orders", "Wishlist", "Profile Settings"] },
+              { name: "COMPONENTS", submenu: ["Buttons", "Forms", "Cards", "Modals", "Typography"] }
+            ].map((menu, index) => (
+              <div 
+                key={index} 
+                className="relative group"
+                onMouseEnter={() => setHoverMenu(menu.name)}
+                onMouseLeave={() => setHoverMenu(null)}
               >
-                {menu.name}
-              </button>
-
-              {/* Mega Menu for SHOP */}
-              {menu.isMegaMenu && dropdownOpen === menu.name && (
-                <div className="absolute left-0 mt-2 w-[600px] bg-white shadow-lg rounded-lg py-4 px-6 grid grid-cols-3 gap-6 z-50">
-                  {menu.submenu.map((category, catIndex) => (
-                    <div key={catIndex}>
-                      <h3 className="text-gray-900 font-semibold mb-2">{category.title}</h3>
-                      {category.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href="#"
-                          className="block text-gray-600 hover:text-teal-400 py-1 transition"
-                        >
-                          {link}
-                        </a>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Regular Dropdowns */}
-              {dropdownOpen === menu.name && (
-            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
-              {menu.submenu.map((item, subIndex) => (
-                <a
-                  key={subIndex}
-                  href={
-                    item === "Home Classic" 
-                      ? "/home-classic" 
-                      : item === "Home Deals" 
-                        ? "/home-deals" 
-                        : item === "Home Mega" 
-                        ? "/home-mega" 
-                        : item === "Home Onepage" 
-                        ? "/home-onepage" 
-                        : "#"
-                  }
-          
-                  className="block px-4 py-2 text-gray-700 hover:bg-teal-100 transition"
+                <button
+                  className={`text-black transition duration-200 ${hoverMenu === menu.name ? 'text-teal-400' : 'hover:text-teal-400'}`}
                 >
-                  {item}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-      
-  
+                  {menu.name}
+                </button>
+
+               {/* Mega Menu for SHOP */}
+{menu.isMegaMenu && hoverMenu === menu.name && (
+  <div className="absolute left-0 mt-2 w-[800px] bg-white shadow-lg rounded-lg py-6 px-8 grid grid-cols-5 gap-4 z-50">
+    {menu.submenu.map((category, catIndex) => (
+      <div key={catIndex} className="border-r border-gray-200 last:border-r-0 px-4 first:pl-0 last:pr-0">
+        <h3 className="text-gray-900 font-semibold mb-3 pb-2 border-b border-gray-100">{category.title}</h3>
+        {category.links.map((link, linkIndex) => (
+          category.title === "CHECKOUT" ? (
+            // ✅ Link to Shop Page with query parameter for checkout steps
+            <Link
+              key={linkIndex}
+              to={`/shop?step=${link.split(" - ")[0].split(" ")[1]}`} 
+              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
+            >
+              {link}
+            </Link>
+          ) : category.title.includes("PRODUCT") ? (
+            // ✅ Link all product-related items to ViewProducts.jsx
+            <Link
+              key={linkIndex}
+              to="/view-products"
+              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
+            >
+              {link}
+            </Link>
+          ) : (
+            // Other links remain unchanged
+            <a
+              key={linkIndex} 
+              href="#"
+              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
+            >
+              {link}
+            </a>
+          )
+        ))}
+      </div>
     ))}
+  </div>
+)}
 
-        </nav>
 
+                {/* Regular Dropdowns */}
+                {!menu.isMegaMenu && hoverMenu === menu.name && (
+                  <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
+                    {menu.submenu.map((item, subIndex) => (
+                      <a
+                        key={subIndex}
+                        href={
+                          item === "Home Classic" 
+                            ? "/home-classic" 
+                            : item === "Home Deals" 
+                              ? "/home-deals" 
+                              : item === "Home Mega" 
+                                ? "/home-mega" 
+                                : item === "Home Onepage" 
+                                  ? "/home-onepage" 
+                                  : "#"
+                        }
+                        className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-500 transition"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
 
           
 
