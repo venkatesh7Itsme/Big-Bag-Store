@@ -12,6 +12,9 @@ import HomeClassic from "./Components/HomeClassic";
 import HomeDeals from "./Components/HomeDeals";
 import HomeOnepage from "./Components/HomeOnepage";
 import Shop from "./Components/Shop";
+import Cart from "./Components/Cart";
+import Aboutus from "./Components/Aboutus"
+import ContactUs from "./Components/ContactUs";
 
 import "./App.css";
 
@@ -41,9 +44,11 @@ function App() {
       
         <Route path="/home-onepage" element={<HomeOnepage />} /> 
         
-        <Route path="/shop" element={<Shop />} /> 
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} /> 
 
-        
+        <Route path="/about-us" element={<Aboutus />} /> 
+        <Route path="/contact-us" element={<ContactUs />} /> 
       </Routes>
       <Footer/>
     </Router>
