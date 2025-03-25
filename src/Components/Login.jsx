@@ -1,44 +1,112 @@
-import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaFacebook, FaGoogle, FaCog } from 'react-icons/fa';
 
-export default function LoginModal({ isOpen, setIsOpen }) {
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Login attempt with:', { email, password, rememberMe });
+    
+  };
+
   return (
-    isOpen && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="bg-white p-6 rounded-lg w-96 shadow-lg relative">
-          <button
-            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-            onClick={() => setIsOpen(false)}
-          >
-            <FaTimes />
-          </button>
-          <h2 className="text-xl font-semibold text-center text-teal-500 mb-4">LOG IN</h2>
-          <div>
-            <label className="block text-gray-600 mb-1">Enter Email</label>
-            <input
-              type="email"
-              className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
-            />
+    <div className="min-h-screen bg-gray-100">
+     
+      <header className="bg-white shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-normal text-gray-500">LOG IN</h1>
+          <div className="flex items-center">
+            <a href="/" className="text-gray-400 hover:text-gray-600 mr-2">HOME</a>
+            <span className="text-gray-400 mx-2">/</span>
+            <span className="text-gray-600">LOG IN</span>
           </div>
-          <div className="mt-4">
-            <label className="block text-gray-600 mb-1">Password</label>
-            <input
-              type="password"
-              className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
-            />
-          </div>
-          <div className="mt-4 flex items-center">
-            <input type="checkbox" className="mr-2" />
-            <label className="text-gray-600">Remember me</label>
-          </div>
-          <button className="w-full mt-4 bg-teal-500 text-white py-2 rounded-md hover:bg-teal-600">
-            LOG IN
-          </button>
-          <p className="text-center mt-3 text-teal-500 cursor-pointer hover:underline">
-            Forgot Password?
-          </p>
         </div>
-      </div>
-    )
+      </header>
+
+    
+      <main className="container mx-auto px-4 py-8 flex justify-center">
+      <div className="w-full max-w-2xl bg-white rounded shadow-md relative">
+         
+          
+          <form onSubmit={handleSubmit}>
+            <div className="bg-teal-400 text-white py-4 text-center text-xl">
+              Log In
+            </div>
+            
+            <div className="p-6">
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Enter Email</label>
+                <input
+                  type="email"
+                  className="w-full p-3 bg-gray-100 rounded"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Password</label>
+                <input
+                  type="password"
+                  className="w-full p-3 bg-gray-100 rounded"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <div className="mb-6">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="mr-2"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                  <span className="text-gray-700">Remember me</span>
+                </label>
+              </div>
+              
+              <button
+                type="submit"
+                className="w-full bg-teal-400 text-white py-3 rounded hover:bg-teal-500 transition duration-300"
+              >
+                LOG IN
+              </button>
+              
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  className="flex justify-center items-center bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition duration-300"
+                >
+                  <FaFacebook className="mr-2" />
+                  LOG IN WITH FACEBOOK
+                </button>
+                
+                <button
+                  type="button"
+                  className="flex justify-center items-center bg-red-500 text-white py-3 rounded hover:bg-red-600 transition duration-300"
+                >
+                  <FaGoogle className="mr-2" />
+                  LOG IN WITH GOOGLE-PLUS
+                </button>
+              </div>
+              
+              <div className="mt-4 text-center">
+                <a href="/forgot-password" className="text-teal-400 hover:underline">
+                  Forgot Password?
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
   );
-}
+};
+
+export default Login;
