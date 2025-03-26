@@ -105,7 +105,7 @@ function App() {
           
             <div className="flex mb-6 pb-6 border-b border-gray-200">
               <div className="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0 mr-4 overflow-hidden">
-                <img src="/api/placeholder/48/48" alt="User avatar" className="w-full h-full object-cover" />
+                <img src="https://bigbag-html.netlify.app/assets/img/blog/avatar.jpg" alt="User avatar" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="flex flex-col sm:flex-row sm:items-center mb-2">
@@ -123,7 +123,7 @@ function App() {
             
             <div className="flex mb-6">
               <div className="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0 mr-4 overflow-hidden">
-                <img src="/api/placeholder/48/48" alt="User avatar" className="w-full h-full object-cover" />
+                <img src="https://bigbag-html.netlify.app/assets/img/blog/avatar.jpg" alt="User avatar" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="flex flex-col sm:flex-row sm:items-center mb-2">
@@ -136,7 +136,11 @@ function App() {
                 <p className="text-gray-600 mb-2">Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua. Ut Enim Ad Minim Veniam, Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat.</p>
                 <button className="text-gray-500 hover:text-gray-700">Reply</button>
               </div>
+              
             </div>
+
+
+            
           </div>
           
           
