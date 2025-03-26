@@ -1,17 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaTwitter, FaFacebookF, FaDribbble, FaVimeoV, FaTumblr } from "react-icons/fa";
 import { FiSearch, FiShoppingCart } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import HomeClassic from "../Components/HomeClassic";  
-import HomeDeals from "../Components/HomeDeals";
-import HomeOnepage  from "../Components/HomeOnepage";
-import Shop from "../Components/Shop";
-
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [show, setShow] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -22,7 +18,6 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
   const searchRef = useRef(null);
 
-  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY.current) {
@@ -38,8 +33,6 @@ export default function Navbar() {
         setSearchOpen(false);
       }
     };
-    
-  
 
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("scroll", handleScroll);
@@ -48,9 +41,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [])
-
- 
+  }, []);
 
   const handleLoginClick = (e) => {
     e.preventDefault();
@@ -71,21 +62,129 @@ export default function Navbar() {
   const closeCreateAccountModal = () => {
     setCreateAccountModalOpen(false);
   };
+
+  // Hide navbar on home-onepage
   if (location.pathname === "/home-onepage") {
     return null;
   }
-  
+
+  // Navigation menu configuration
+  const navigationMenus = [
+    { 
+      name: "HOME", 
+      submenu: [
+        { text: "Home Default", link: "/" },
+        { text: "Home Classic", link: "/home-classic" },
+        { text: "Home Deals", link: "/home-deals" },
+        { text: "Home Mega", link: "/home-mega" },
+        { text: "Home Onepage", link: "/home-onepage" }
+      ]
+    },
+    {
+      name: "SHOP",
+      isMegaMenu: true,
+      submenu: [
+        {
+          title: "PRODUCTS GRID VIEW",
+          links: [
+            { text: "Products Sidebar Left", link: "/products/sidebar-left" },
+            { text: "Products Sidebar Right", link: "/products/sidebar-right" },
+            { text: "Products 3 Columns V1", link: "/products/3-columns-v1" },
+            { text: "Products 3 Columns V2", link: "/products/3-columns-v2" },
+            { text: "Products 4 Columns", link: "/products/4-columns" }
+          ]
+        },
+        {
+          title: "PRODUCTS LIST VIEW",
+          links: [
+            { text: "Products Sidebar Left", link: "/products/list-sidebar-left" },
+            { text: "Products Sidebar Right", link: "/products/list-sidebar-right" }
+          ]
+        },
+        {
+          title: "PRODUCT SINGLE",
+          links: [
+            { text: "Single Product", link: "/product/single" },
+            { text: "Product Comparison", link: "/product/comparison" }
+          ]
+        },
+        {
+          title: "CHECKOUT",
+          links: [
+            { text: "Step 1 - Shipping", link: "/checkout/shipping" },
+            { text: "Step 2 - Payment", link: "/checkout/payment" },
+            { text: "Step 3 - Review", link: "/checkout/review" },
+            { text: "Step 4 - Complete", link: "/checkout/complete" }
+          ]
+        },
+        {
+          title: "OTHERS",
+          links: [
+            { text: "Product Categories", link: "/product-categories" },
+            { text: "Cart Page", link: "/cart" }
+          ]
+        }
+      ]
+    },
+    { 
+      name: "PAGES", 
+      submenu: [
+        { text: "About Us", link: "/about-us" },
+        { text: "Contact Us", link: "/contact-us" },
+        { text: "Register", link: "/register" },
+        { text: "Register Or Login", link: "/register-login" },
+        { text: "Login", link: "/login" },
+        { text: "Password Recovery", link: "/password-recovery" },
+        { text: "Privacy Policy", link: "/privacy-policy" },
+        { text: "Terms & Conditions", link: "/terms-conditions" },
+        { text: "FAQ", link: "/faq" },
+        { text: "404 Not Found", link: "/404" },
+        { text: "Coming Soon", link: "/coming-soon" }
+      ] 
+    },
+    { 
+      name: "BLOG", 
+      submenu: [
+        { text: "Right Sidebar", link: "/right-sidebar" },
+        { text: "Left Sidebar", link: "/left-sidebar" },
+        { text: "Full Width", link: "/full-width" },
+        { text: "Single Blog", link: "/single-blog" },
+        { text: "Single Rightsidebar", link: "/single-rightsidebar" },
+        { text: "Single Leftsidebar", link: "/single-leftsidebar" }
+
+      ] 
+    },
+    { 
+      name: "MY ACCOUNT", 
+      submenu: [
+        { text: "Dashboard", link: "/dashboard" },
+        { text: "Profile", link: "/profile" },
+        { text: "All Orders", link: "/all-orders" },
+        { text: "Single Orders", link: "/single-orders" },
+        { text: "Wishlist", link: "/wishlist" },
+        { text: "Address", link: "/address" },
+        { text: "My Tickets", link: "/my-tickets" },
+        { text: "Single Tickets", link: "/single-tickets" },
+      ] 
+    },
+    { 
+      name: "COMPONENTS", 
+      submenu: [
+        { text: "Buttons", link: "/components/buttons" },
+        { text: "Forms", link: "/components/forms" },
+        { text: "Cards", link: "/components/cards" },
+        { text: "Modals", link: "/components/modals" },
+        { text: "Typography", link: "/components/typography" }
+      ] 
+    }
+  ];
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
-          show ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-      
+      <header className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
+        {/* Top Navigation Section */}
         <div className="hidden md:flex bg-black text-gray-400 text-sm justify-between items-center px-12 md:px-16 py-2">
-         
+          {/* Social Icons */}
           <div className="flex space-x-4">
             <FaTwitter className="hover:text-white cursor-pointer" />
             <FaFacebookF className="hover:text-white cursor-pointer" />
@@ -94,15 +193,27 @@ export default function Navbar() {
             <FaTumblr className="hover:text-white cursor-pointer" />
           </div>
 
-         
+          {/* Account and Search Section */}
           <div className="flex items-center space-x-6">
             <div>
-              <a href="#" className="mr-2 hover:text-white" onClick={handleLoginClick}>Log in</a> or
-              <a href="#" className="ml-2 hover:text-white" onClick={handleCreateAccountClick}>Create an account</a>
+              <Link 
+                to="#" 
+                className="mr-2 hover:text-white" 
+                onClick={handleLoginClick}
+              >
+                Log in
+              </Link> or
+              <Link 
+                to="#" 
+                className="ml-2 hover:text-white" 
+                onClick={handleCreateAccountClick}
+              >
+                Create an account
+              </Link>
             </div>
             <div className="w-px h-6 bg-gray-500"></div>
             <div className="flex items-center space-x-4">
-           
+              {/* Search Button */}
               <button 
                 className="bg-gray-700 p-2 rounded-full cursor-pointer" 
                 onClick={() => setSearchOpen(!searchOpen)}
@@ -131,19 +242,17 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
-
-              </div>
-              <div className="bg-teal-400 text-white px-4 py-2 rounded flex items-center space-x-2 cursor-pointer">
-                <FiShoppingCart className="text-xl" />
-                <span>$99</span>
-              </div>
+            </div>
+            <div className="bg-teal-400 text-white px-4 py-2 rounded flex items-center space-x-2 cursor-pointer">
+              <FiShoppingCart className="text-xl" />
+              <span>$99</span>
             </div>
           </div>
-        
+        </div>
 
-      
-        <div className="bg-white shadow-mdpx-12 md:px-16 py-6 flex justify-between items-center">
-         
+        {/* Main Navigation */}
+        <div className="bg-white shadow-md px-12 md:px-16 py-6 flex justify-between items-center">
+          {/* Mobile Menu Toggle */}
           <button className="md:hidden text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
             <HiMenu />
           </button>
@@ -155,40 +264,9 @@ export default function Navbar() {
           </svg>
 
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-10 text-[16px] font-semibold ml-auto relative px-16 py-6">
-            {[
-              { name: "HOME", submenu: ["Home Default", "Home Classic", "Home Deals", "Home Mega", "Home Onepage"] },
-              {
-                name: "SHOP",
-                isMegaMenu: true,
-                submenu: [
-                  {
-                    title: "PRODUCTS GRID VIEW",
-                    links: ["Products Sidebar Left", "Products Sidebar Right", "Products 3 Columns V1", "Products 3 Columns V2", "Products 4 Columns"],
-                  },
-                  {
-                    title: "PRODUCTS LIST VIEW",
-                    links: ["Products Sidebar Left", "Products Sidebar Right"],
-                  },
-                  {
-                    title: "PRODUCT SINGLE",
-                    links: ["Single Product", "Product Comparison"],
-                  },
-                  {
-                    title: "CHECKOUT",
-                    links: ["Step 1 - Shipping", "Step 2 - Payment", "Step 3 - Review", "Step 4 - Complete"],
-                  },
-                  {
-                    title: "OTHERS",
-                    links: ["Product Categories", "Cart Page"],
-                  },
-                ],
-              },
-              { name: "PAGES", submenu: ["About Us", "Contact Us", "Register", "Login", "FAQ", "404 Not Found"] },
-              { name: "BLOG", submenu: ["Right Sidebar", "Left Sidebar", "Full Width", "Single Post"] },
-              { name: "MY ACCOUNT", submenu: ["Dashboard", "Orders", "Wishlist", "Profile Settings"] },
-              { name: "COMPONENTS", submenu: ["Buttons", "Forms", "Cards", "Modals", "Typography"] }
-            ].map((menu, index) => (
+            {navigationMenus.map((menu, index) => (
               <div 
                 key={index} 
                 className="relative group"
@@ -201,69 +279,52 @@ export default function Navbar() {
                   {menu.name}
                 </button>
 
-               {/* Mega Menu for SHOP */}
-{menu.isMegaMenu && hoverMenu === menu.name && (
-  <div className="absolute left-0 mt-2 w-[800px] bg-white shadow-lg rounded-lg py-6 px-8 grid grid-cols-5 gap-4 z-50">
-    {menu.submenu.map((category, catIndex) => (
-      <div key={catIndex} className="border-r border-gray-200 last:border-r-0 px-4 first:pl-0 last:pr-0">
-        <h3 className="text-gray-900 font-semibold mb-3 pb-2 border-b border-gray-100">{category.title}</h3>
-        {category.links.map((link, linkIndex) => (
-          category.title === "CHECKOUT" ? (
-            // ✅ Link to Shop Page with query parameter for checkout steps
-            <Link
-              key={linkIndex}
-              to={`/shop?step=${link.split(" - ")[0].split(" ")[1]}`} 
-              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
-            >
-              {link}
-            </Link>
-          ) : category.title.includes("PRODUCT") ? (
-            // ✅ Link all product-related items to ViewProducts.jsx
-            <Link
-              key={linkIndex}
-              to="/view-products"
-              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
-            >
-              {link}
-            </Link>
-          ) : (
-            // Other links remain unchanged
-            <a
-              key={linkIndex} 
-              href="#"
-              className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
-            >
-              {link}
-            </a>
-          )
-        ))}
-      </div>
-    ))}
-  </div>
-)}
+                {/* Mega Menu for SHOP */}
+                {menu.isMegaMenu && hoverMenu === menu.name && (
+                  <div className="absolute left-0 mt-2 w-[800px] bg-white shadow-lg rounded-lg py-6 px-8 grid grid-cols-5 gap-4 z-50">
+                    {menu.submenu.map((category, catIndex) => (
+                      <div key={catIndex} className="border-r border-gray-200 last:border-r-0 px-4 first:pl-0 last:pr-0">
+                        <h3 className="text-gray-900 font-semibold mb-3 pb-2 border-b border-gray-100">{category.title}</h3>
+                        {category.links.map((link, linkIndex) => (
+                          <Link
+                            key={linkIndex}
+                            to={link.link}
+                            className="block text-gray-600 hover:text-teal-400 py-1.5 transition text-sm"
+                          >
+                            {link.text}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-
-                {/* Regular Dropdowns */}
-                {!menu.isMegaMenu && hoverMenu === menu.name && (
+                {/* Regular Dropdowns for other menus */}
+                {!menu.isMegaMenu && menu.name !== "PAGES" && hoverMenu === menu.name && (
                   <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
                     {menu.submenu.map((item, subIndex) => (
-                      <a
+                      <Link
                         key={subIndex}
-                        href={
-                          item === "Home Classic" 
-                            ? "/home-classic" 
-                            : item === "Home Deals" 
-                              ? "/home-deals" 
-                              : item === "Home Mega" 
-                                ? "/home-mega" 
-                                : item === "Home Onepage" 
-                                  ? "/home-onepage" 
-                                  : "#"
-                        }
+                        to={item.link}
                         className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-500 transition"
                       >
-                        {item}
-                      </a>
+                        {item.text}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* PAGES Dropdown */}
+                {menu.name === "PAGES" && hoverMenu === menu.name && (
+                  <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
+                    {menu.submenu.map((item, subIndex) => (
+                      <Link
+                        key={subIndex}
+                        to={item.link}
+                        className="block px-4 py-2 text-gray-700 hover:bg-teal-100 hover:text-teal-500 transition"
+                      >
+                        {item.text}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -271,9 +332,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          
-
-     
+          {/* Mobile Cart Icon */}
           <div className="relative cursor-pointer block md:hidden">
             <FiShoppingCart className="text-black text-2xl" />
             <span className="absolute -top-2 -right-2 bg-black text-white text-xs px-1.5 py-0.5 rounded-full">
@@ -282,6 +341,7 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Mobile Search Bar */}
         <div className="bg-white px-4 py-3 flex md:hidden justify-center">
           <div className="w-full max-w-lg relative">
             <input
@@ -293,26 +353,28 @@ export default function Navbar() {
           </div>
         </div>
 
-       
+        {/* Mobile Menu */}
         {menuOpen && (
           <nav className="bg-white shadow-md px-4 py-4 md:hidden flex justify-end">
             <div className="flex flex-col space-y-3 text-[14px] font-semibold items-end text-right">
-              <a href="#" className="text-teal-400">HOME</a>
-              <a href="#" className="text-black hover:text-teal-400">SHOP</a>
-              <a href="#" className="text-black hover:text-teal-400">PAGES</a>
-              <a href="#" className="text-black hover:text-teal-400">BLOG</a>
-              <a href="#" className="text-black hover:text-teal-400 cursor-pointer" onClick={handleLoginClick}>MY ACCOUNT</a>
-              <a href="#" className="text-black hover:text-teal-400">COMPONENTS</a>
+              {navigationMenus.map((menu, index) => (
+                <Link 
+                  key={index} 
+                  to={menu.submenu[0]?.link || '#'} 
+                  className={`${index === 0 ? 'text-teal-400' : 'text-black hover:text-teal-400'}`}
+                >
+                  {menu.name}
+                </Link>
+              ))}
             </div>
           </nav>
         )}
       </header>
 
-      
+      {/* Login Modal */}
       {loginModalOpen && (
-          <div className="fixed inset-0 bg-transperent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-[100] transition-opacity duration-150 ease-linear">
+        <div className="fixed inset-0 bg-transperent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-[100] transition-opacity duration-150 ease-linear">
           <div className="bg-white w-full max-w-md mx-4 rounded-lg overflow-hidden shadow-xl">
-           
             <div className="bg-teal-400 text-white px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold">LOG IN</h2>
               <button 
@@ -323,7 +385,6 @@ export default function Navbar() {
               </button>
             </div>
             
-         
             <div className="p-6">
               <div className="mb-6">
                 <label className="block text-gray-700 mb-2">Enter Email</label>
@@ -367,9 +428,7 @@ export default function Navbar() {
       {/* Create Account Modal */}
       {createAccountModalOpen && (
         <div className="fixed inset-0 bg-transperent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-[100] transition-opacity duration-150 ease-linear">
-
           <div className="bg-white w-full max-w-md mx-4 rounded-lg overflow-hidden shadow-xl">
-            {/* Modal Header */}
             <div className="bg-teal-400 text-white px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold">CREATE AN ACCOUNT</h2>
               <button 
@@ -380,7 +439,6 @@ export default function Navbar() {
               </button>
             </div>
             
-           
             <div className="p-6">
               <div className="mb-6">
                 <label className="block text-gray-700 mb-2">Enter Email</label>
