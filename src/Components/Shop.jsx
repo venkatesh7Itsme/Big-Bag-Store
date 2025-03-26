@@ -11,7 +11,7 @@ import {
 const CheckoutProcess = () => {
   const [currentStep, setCurrentStep] = useState(1);
   
-  // Form data state
+  
   const [shippingData, setShippingData] = useState({
     firstName: '',
     lastName: '',
@@ -28,7 +28,7 @@ const CheckoutProcess = () => {
   const [selectedShipping, setSelectedShipping] = useState('standard');
   const [paymentMethod, setPaymentMethod] = useState('credit');
   
-  // Order summary data
+
   const orderSummary = {
     subtotal: 99.00,
     shippingHandling: 18.00,
@@ -36,14 +36,14 @@ const CheckoutProcess = () => {
     total: 117.00
   };
   
-  // Cart items
+
   const cartItems = [
     { id: 1, name: 'Italian Winter Hat', price: 23.00, quantity: 1, image: 'https://bigbag-html.netlify.app/assets/img/products/cart-image1.jpg' },
     { id: 2, name: 'Italian Winter Hat', price: 43.00, quantity: 1, image: 'https://bigbag-html.netlify.app/assets/img/products/cart-image2.jpg' },
     { id: 3, name: 'Italian Winter Hat', price: 33.00, quantity: 1, image: 'https://bigbag-html.netlify.app/assets/img/products/cart-image3.jpg' }
   ];
   
-  // Shipping methods
+
   const shippingMethods = [
     { id: 'standard', name: 'Standard Ground (USPS)', price: 7.50, delivery: 'Delivered in 8-12 business days.' },
     { id: 'premium', name: 'Premium Ground (UPS)', price: 12.50, delivery: 'Delivered in 4-7 business days.' },
@@ -51,45 +51,45 @@ const CheckoutProcess = () => {
     { id: 'ups1', name: 'UPS 1 Business Day', price: 35.00, delivery: 'Orders placed by 9.45AM PST will ship same day.' }
   ];
   
-  // Handle form input changes
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setShippingData(prev => ({ ...prev, [name]: value }));
   };
   
-  // Handle shipping method selection
+ 
   const handleShippingSelect = (id) => {
     setSelectedShipping(id);
   };
   
-  // Handle payment method selection
+ 
   const handlePaymentSelect = (method) => {
     setPaymentMethod(method);
   };
   
-  // Handle continue button click
+  
   const handleContinue = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
   };
   
-  // Handle back button click
+ 
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
   
-  // Handle direct navigation by clicking on step indicators
+  
   const handleStepClick = (step) => {
-    // Allow clicking on steps that are accessible based on the current progress
+   
     if (step <= 3) {
       setCurrentStep(step);
     }
   };
   
-  // Render progress bar with clickable steps
+
   const renderProgressBar = () => {
     return (
       <div className="flex items-center justify-between mb-8">
@@ -162,7 +162,7 @@ const CheckoutProcess = () => {
     );
   };
   
-  // Render shipping form
+ 
   const renderShippingForm = () => {
     return (
       <div className="mb-8">
@@ -483,7 +483,7 @@ const CheckoutProcess = () => {
     );
   };
   
-  // Render step content
+ 
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
@@ -497,7 +497,7 @@ const CheckoutProcess = () => {
     }
   };
   
-  // Render action buttons
+
   const renderActions = () => {
     return (
       <div className="flex justify-between">
