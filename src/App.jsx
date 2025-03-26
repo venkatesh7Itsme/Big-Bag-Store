@@ -24,9 +24,17 @@ import TermsConditions from "./Components/TermsConditions.jsx";
 import FAQ from "./Components/Faq.jsx";
 import PageNot from "./Components/PageNot.jsx";
 import ComingSoon from "./Components/ComingSoon.jsx";
-
+import RightSidebar from "./Components/RightSidebar.jsx";
+import LeftSidebar from "./Components/LeftSidebar.jsx";
+import FullWidth from "./Components/FullWidth.jsx";
+import SingleBlog from "./Components/SingleBlog.jsx";
+import SingleRightsidebar from "./Components/SingleRightsidebar.jsx";
+import SingleLeftsidebar from "./Components/SingleLeftsidebar.jsx";
+import Dashboard from "./Components/Dashboard.jsx";
+import Profile from "./Components/Profile.jsx";
 
 import "./App.css";
+
 
 function App() {
   return (
@@ -68,7 +76,17 @@ function App() {
         <Route path="/faq" element={<FAQ/>} /> 
         <Route path="*" element={<PageNot />} />
         <Route path="/coming-soon" element={<ComingSoon/>} /> 
+        <Route path="/right-sidebar" element={<RightSidebar/>} /> 
+        <Route path="/left-sidebar" element={<LeftSidebar/>} />
+        <Route path="/full-width" element={<FullWidth/>} />
+        <Route path="/single-blog" element={<SingleBlog/>} />
+        <Route path="/single-rightsidebar" element={<SingleRightsidebar/>} />
+        <Route path="/single-leftsidebar" element={<SingleLeftsidebar/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/profile" element={<Profile/>} />
 
+
+        
 
 
 
