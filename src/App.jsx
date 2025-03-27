@@ -32,6 +32,12 @@ import SingleRightsidebar from "./Components/SingleRightsidebar.jsx";
 import SingleLeftsidebar from "./Components/SingleLeftsidebar.jsx";
 import Dashboard from "./Components/Dashboard.jsx";
 import Profile from "./Components/Profile.jsx";
+import Address from "./Components/Address.jsx"
+import AllOders from "./Components/AllOrders.jsx";
+import SingleOders from "./Components/SingleOrders.jsx";
+import WishList from "./Components/WishList.jsx";
+import  MyTickets from "./Components/MyTickets.jsx";
+import SingleTicket from "./Components/SingleTicket.jsx";
 
 import "./App.css";
 
@@ -84,6 +90,15 @@ function App() {
         <Route path="/single-leftsidebar" element={<SingleLeftsidebar/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/address" element={<Address/>} />
+        <Route path="/all-orders" element={<AllOders/>} />
+        <Route path="/single-orders" element={<SingleOders/>} />
+        <Route path="/wishlist" element={<WishList/>} />
+        <Route path="/my-tickets" element={<MyTickets/>} />
+        <Route path="/single-tickets" element={<SingleTicket/>} />
+
+
+
 
 
         
