@@ -43,7 +43,7 @@ const CartPage = () => {
   };
 
   const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const vat = subtotal * 0.18; // 18% VAT
+  const vat = subtotal * 0.18; 
   const grandTotal = subtotal + vat;
 
   const handleCheckout = () => {
