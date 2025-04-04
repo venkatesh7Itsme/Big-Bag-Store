@@ -2,7 +2,7 @@ import React from 'react';
 import { FaBell, FaInbox, FaUser } from 'react-icons/fa';
 
 const Badge = ({ children, variant = 'primary', size = 'md', count, dot }) => {
-  // Variant styles
+
   const variantClasses = {
     primary: 'bg-blue-500 text-white',
     secondary: 'bg-gray-500 text-white',
@@ -12,14 +12,14 @@ const Badge = ({ children, variant = 'primary', size = 'md', count, dot }) => {
     info: 'bg-sky-500 text-white',
   };
 
-  // Size styles
+
   const sizeClasses = {
     sm: 'text-xs px-1.5 py-0.5',
     md: 'text-sm px-2 py-1',
     lg: 'text-base px-3 py-1.5',
   };
 
-  // Get classes for badge
+
   const badgeClasses = `
     inline-flex items-center rounded font-medium
     ${variantClasses[variant] || variantClasses.primary}
@@ -43,14 +43,14 @@ const Badge = ({ children, variant = 'primary', size = 'md', count, dot }) => {
   );
 };
 
-// Example usage component
+
 const BadgeExamples = () => {
   return (
     <div className="p-8 space-y-8">
       <div>
         <h2 className="text-xl font-semibold mb-4">Badge Examples</h2>
         
-        {/* Example 1: Text with badges */}
+        
         <div className="space-y-4 mb-8">
           <h3 className="text-lg font-medium">Example 1</h3>
           <div className="space-y-2">
@@ -75,7 +75,6 @@ const BadgeExamples = () => {
           </div>
         </div>
         
-        {/* Example 2: Notification badges */}
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Example 2</h3>
           <div className="flex space-x-4">
@@ -99,7 +98,7 @@ const BadgeExamples = () => {
         </div>
       </div>
       
-      {/* Additional badge variants */}
+     
       <div>
         <h2 className="text-xl font-semibold mb-4">Badge Variants</h2>
         <div className="flex flex-wrap gap-4">
