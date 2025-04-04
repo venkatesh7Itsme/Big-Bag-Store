@@ -170,11 +170,16 @@ export default function Navbar() {
     { 
       name: "COMPONENTS", 
       submenu: [
-        { text: "Buttons", link: "/components/buttons" },
-        { text: "Forms", link: "/components/forms" },
-        { text: "Cards", link: "/components/cards" },
-        { text: "Modals", link: "/components/modals" },
-        { text: "Typography", link: "/components/typography" }
+        { text: "Accordions", link: "/accordions" },
+        { text: "Alert", link: "/alert" },
+        { text: "Badge", link: "badge" },
+        { text: "Buttons", link: "/buttons" },
+        { text: "Button Group", link: "/button-group" },
+        { text: "Cards", link: "/cards" },
+        {text: "Countdown", link:"/count-down"},
+        {text: "Divider", link:"/divider"},
+        {text: "Heading", link:"/heading"}
+       
       ] 
     }
   ];
@@ -182,9 +187,9 @@ export default function Navbar() {
   return (
     <>
       <header className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
-        {/* Top Navigation Section */}
+       
         <div className="hidden md:flex bg-black text-gray-400 text-sm justify-between items-center px-12 md:px-16 py-2">
-          {/* Social Icons */}
+   
           <div className="flex space-x-4">
             <FaTwitter className="hover:text-white cursor-pointer" />
             <FaFacebookF className="hover:text-white cursor-pointer" />
@@ -193,7 +198,7 @@ export default function Navbar() {
             <FaTumblr className="hover:text-white cursor-pointer" />
           </div>
 
-          {/* Account and Search Section */}
+        
           <div className="flex items-center space-x-6">
             <div>
               <Link 
@@ -314,7 +319,7 @@ export default function Navbar() {
                   </div>
                 )}
 
-                {/* PAGES Dropdown */}
+             
                 {menu.name === "PAGES" && hoverMenu === menu.name && (
                   <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50">
                     {menu.submenu.map((item, subIndex) => (
@@ -332,16 +337,17 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile Cart Icon */}
           <div className="relative cursor-pointer block md:hidden">
+          <Link to="/cart">
             <FiShoppingCart className="text-black text-2xl" />
             <span className="absolute -top-2 -right-2 bg-black text-white text-xs px-1.5 py-0.5 rounded-full">
               3
             </span>
+            </Link>
           </div>
         </div>
 
-        {/* Mobile Search Bar */}
+      
         <div className="bg-white px-4 py-3 flex md:hidden justify-center">
           <div className="w-full max-w-lg relative">
             <input
@@ -353,7 +359,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
           <nav className="bg-white shadow-md px-4 py-4 md:hidden flex justify-end">
             <div className="flex flex-col space-y-3 text-[14px] font-semibold items-end text-right">
@@ -371,7 +376,7 @@ export default function Navbar() {
         )}
       </header>
 
-      {/* Login Modal */}
+   
       {loginModalOpen && (
         <div className="fixed inset-0 bg-transperent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-[100] transition-opacity duration-150 ease-linear">
           <div className="bg-white w-full max-w-md mx-4 rounded-lg overflow-hidden shadow-xl">
@@ -425,7 +430,7 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Create Account Modal */}
+     
       {createAccountModalOpen && (
         <div className="fixed inset-0 bg-transperent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-[100] transition-opacity duration-150 ease-linear">
           <div className="bg-white w-full max-w-md mx-4 rounded-lg overflow-hidden shadow-xl">
