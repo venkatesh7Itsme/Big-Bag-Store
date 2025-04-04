@@ -184,11 +184,10 @@ const SvgIconAlert = ({ variant, children }) => {
   );
 };
 
-// Main Demo Component
 const AlertsDemo = () => {
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      {/* Basic Alerts Section */}
+    
       <div className="bg-gray-100 p-4 mb-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Alerts</h1>
@@ -212,7 +211,7 @@ const AlertsDemo = () => {
         <Alert variant="light">This is a light alert—check it out!</Alert>
       </div>
 
-      {/* Link Color Alerts Section */}
+      
       <h1 className="text-2xl font-semibold mb-4">Link Color</h1>
       <div className="space-y-4 mb-8">
         <Alert variant="primary">This is a primary alert with an example link. Give it a click if you like.</Alert>
@@ -225,13 +224,13 @@ const AlertsDemo = () => {
         <Alert variant="dark">This is a dark alert with an example link. Give it a click if you like.</Alert>
       </div>
       
-      {/* Additional Content Section */}
+    
       <h1 className="text-2xl font-semibold mb-4">Additional Content</h1>
       <div className="space-y-4 mb-8">
         <AlertWithContent />
       </div>
       
-      {/* Dismissable Alert Section */}
+   
       <div className="bg-gray-100 p-4 mb-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Dismissable alert with icon</h1>
@@ -244,8 +243,7 @@ const AlertsDemo = () => {
           </button>
         </div>
       </div>
-      
-      {/* Font Icon Section */}
+   
       <h1 className="text-2xl font-semibold mb-4">Font Icon</h1>
       <div className="space-y-4 mb-8">
         <DismissableAlert variant="primary" icon="info" />
@@ -253,7 +251,7 @@ const AlertsDemo = () => {
         <DismissableAlert variant="warning" icon="warning" />
       </div>
       
-      {/* SVG Icon Alerts Section (new section) */}
+    
       <div className="bg-gray-100 p-4 mb-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">SVG Icon Alerts</h1>
